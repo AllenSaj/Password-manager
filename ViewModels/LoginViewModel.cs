@@ -19,7 +19,7 @@ namespace PasswordManager.ViewModels
         private string _errorMessage;
         private bool _isViewVisible = true;
 
-        private IUserRepository userRepository;
+        private readonly IUserRepository userRepository;
 
         public string Username
         {
