@@ -12,7 +12,7 @@ namespace PasswordManager.Repositories
         private readonly string _connectionString;
         public RepositoryBase()
         {
-            _connectionString = "Server=(local); Database=LoginDB; Integrated Security=true";
+            _connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=\"C:\\Users\\Allen\\Desktop\\CS WORK\\projects\\PasswordManager\\PasswordManager\\Repositories\\DB.mdf\";Integrated Security=True";
         }
         protected SqlConnection GetConnection()
         {
