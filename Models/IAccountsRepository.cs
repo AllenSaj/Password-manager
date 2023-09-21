@@ -10,15 +10,15 @@ namespace PasswordManager.Models
 {
     public interface IAccountsRepository
     {
-        void Add(AccountsModel accountsModel);
-        void Edit(AccountsModel oldAccount, AccountsModel newAccount);
+        void Add(AccountsModel account);
+        void Edit(AccountsModel account);
         void Remove(int id);
-        AccountsModel GetById(int id);
+        AccountsModel GetById(int id); 
         AccountsModel GetByUsername(string username);
         AccountsModel GetByEmail(string email);
         AccountsModel GetByWebsite(string website);
         AccountsModel GetByName(string name);
 
         ObservableCollection<AccountsModel> GetByAll();
-    }
+   }
 }
