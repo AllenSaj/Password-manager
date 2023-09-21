@@ -79,6 +79,7 @@ namespace PasswordManager.ViewModels
         public ICommand ShowAccountsViewCommand { get; }
         public ICommand ShowSecurityViewCommand { get; }
         public ICommand ShowSettingsViewCommand { get; }
+        public ICommand ShowAboutViewCommand { get; }
 
         public MainViewModel()
         {
@@ -89,6 +90,7 @@ namespace PasswordManager.ViewModels
             ShowAccountsViewCommand = new ViewModelCommand(ExecuteShowAccountsViewCommand);
             ShowSecurityViewCommand = new ViewModelCommand(ExecuteShowSecurityViewComman);
             ShowSettingsViewCommand = new ViewModelCommand(ExecuteShowSettingsViewCommand);
+            ShowAboutViewCommand = new ViewModelCommand(ExecuteShowAboutViewCommand);
 
             //Default view
             ExecuteShowAccountsViewCommand(null);
@@ -107,7 +109,7 @@ namespace PasswordManager.ViewModels
         {
             CurrentChildView = new SecurityViewModel();
             Caption = "Security";
-            Icon = IconChar.BookOpen;
+            Icon = IconChar.UserSecret;
         }
 
         private void ExecuteShowAccountsViewCommand(object obj)
@@ -115,6 +117,13 @@ namespace PasswordManager.ViewModels
             CurrentChildView = new AccountsViewModel();
             Caption = "Accounts";
             Icon = IconChar.UserGroup;
+        }
+
+        private void ExecuteShowAboutViewCommand(object obj)
+        {
+            CurrentChildView = new AboutViewModel();
+            Caption = "About me";
+            Icon = IconChar.BookOpen;
         }
 
         private void LoadCurrentUserData()

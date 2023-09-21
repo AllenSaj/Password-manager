@@ -1,4 +1,5 @@
 ﻿using System;
+using System.CodeDom.Compiler;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -21,7 +22,7 @@ namespace PasswordManager.ViewModels
         public ViewModelCommand(Action<object> executeAction, Predicate<object> canExecuteAction)
         {
             _canExecuteAction = canExecuteAction;
-            _executeAction = executeAction;
+            _executeAction = executeAction ?? throw new ArgumentNullException(nameof(executeAction));
         }
 
         public event EventHandler CanExecuteChanged
