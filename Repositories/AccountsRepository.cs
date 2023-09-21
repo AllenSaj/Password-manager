@@ -10,6 +10,7 @@ using System.Windows.Navigation;
 using System.Collections.ObjectModel;
 using System.Collections;
 using System.Net;
+using System.Windows.Input;
 
 namespace PasswordManager.Repositories
 {
@@ -24,19 +25,33 @@ namespace PasswordManager.Repositories
                 connection.Open();
                 command.Connection = connection;
                 command.CommandText = "insert into [Accounts]([Name], [Username], [Email], [Password], [Website], [Notes]) values (@name, @username, @email, @password, @website, @notes)";
-                command.Parameters.Add("@name", SqlDbType.Int).Value = account.Name;
-                command.Parameters.Add("@username", SqlDbType.Int).Value = account.Username;
-                command.Parameters.Add("@email", SqlDbType.Int).Value = account.Email;
-                command.Parameters.Add("@password", SqlDbType.Int).Value = account.Password;
-                command.Parameters.Add("@website", SqlDbType.Int).Value = account.Website;
-                command.Parameters.Add("@notes", SqlDbType.Int).Value = account.Notes;
+                command.Parameters.Add("@name", SqlDbType.NVarChar).Value = account.Name;
+                command.Parameters.Add("@username", SqlDbType.NVarChar).Value = account.Username;
+                command.Parameters.Add("@email", SqlDbType.NVarChar).Value = account.Email;
+                command.Parameters.Add("@password", SqlDbType.NVarChar).Value = account.Password;
+                command.Parameters.Add("@website", SqlDbType.NVarChar).Value = account.Website;
+                command.Parameters.Add("@notes", SqlDbType.VarChar).Value = account.Notes;
                 command.ExecuteNonQuery();
             }
         }
 
-        void IAccountsRepository.Edit(AccountsModel oldAccount, AccountsModel newAccount)
+        void IAccountsRepository.Edit(AccountsModel account)
         {
-            throw new NotImplementedException();
+            var connection = GetConnection();
+            using (var command = new SqlCommand())
+            {
+                connection.Open();
+                command.Connection = connection;
+                command.CommandText = "UPDATE Accounts SET Name = @name,Username = @username,Email = @email,Password = @password,Website=@website,Notes=@notes where id = @id";
+                command.Parameters.AddWithValue("@name", account.Name);
+                command.Parameters.AddWithValue("@username", account.Username);
+                command.Parameters.AddWithValue("@email", account.Email);
+                command.Parameters.AddWithValue("@password", account.Password);
+                command.Parameters.AddWithValue("@website", account.Website);
+                command.Parameters.AddWithValue("@notes", account.Notes);
+                command.Parameters.AddWithValue("@id", account.Id);
+                command.ExecuteNonQuery();
+            }
         }
 
         void IAccountsRepository.Remove(int id)
@@ -53,7 +68,7 @@ namespace PasswordManager.Repositories
         }
 
         ObservableCollection<AccountsModel> IAccountsRepository.GetByAll()
-        { 
+        {
             var connection = GetConnection();
             ObservableCollection<AccountsModel> _accounts = new ObservableCollection<AccountsModel>();
             using (SqlCommand command = new SqlCommand())
