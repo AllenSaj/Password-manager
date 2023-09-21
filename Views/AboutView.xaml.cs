@@ -1,5 +1,4 @@
-﻿using PasswordManager.ViewModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,11 +16,11 @@ using System.Windows.Shapes;
 namespace PasswordManager.Views
 {
     /// <summary>
-    /// Interaction logic for AccountsView.xaml
+    /// Interaction logic for AboutView.xaml
     /// </summary>
-    public partial class AccountsView : UserControl 
+    public partial class AboutView : UserControl
     {
-        public AccountsView()
+        public AboutView()
         {
             InitializeComponent();
         }
